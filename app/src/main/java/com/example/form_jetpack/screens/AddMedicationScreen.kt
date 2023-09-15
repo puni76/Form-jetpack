@@ -25,7 +25,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -43,7 +42,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.form_jetpack.R
+import com.example.form_jetpack.data.MedicationDetails
+import com.example.form_jetpack.data.MedicationViewModel
 import com.example.form_jetpack.util.EndDateTextField
 import com.example.form_jetpack.util.Recurrence
 import com.example.form_jetpack.util.RecurrenceDropDownMenu
@@ -59,7 +61,7 @@ import java.util.Date
     ExperimentalComposeUiApi::class
 )
 @Composable
-fun AddMedicationScreen(){
+fun AddMedicationScreen(navController: NavHostController, viewModel: MedicationViewModel) {
     var medicationName by rememberSaveable { mutableStateOf("") }
     var numberOfDosage by rememberSaveable { mutableStateOf("1") }
     var recurrence by rememberSaveable { mutableStateOf(Recurrence.Daily.name) }
@@ -267,11 +269,27 @@ fun AddMedicationScreen(){
         }
         Spacer(modifier = Modifier.padding(8.dp))
         Button(
+
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
                 .align(Alignment.CenterHorizontally),
             onClick = {
+                val medication = MedicationDetails(
+                    medicationName = medicationName,
+                    numberOfDosage = numberOfDosage.toIntOrNull() ?: 0,
+                    recurrence = recurrence,
+                    endDate = endDate,
+                    morningSelection = isMorningSelected,
+                    afternoonSelection = isAfternoonSelected,
+                    eveningSelection = isEveningSelected,
+                    nightSelection = isNightSelected
+                )
+
+                viewModel.addMedication(medication)
+                // Navigate to MedicationApp after saving
+                navController.navigate("medicationApp")
+
                 validateMedication(
                     name = medicationName,
                     dosage = numberOfDosage.toIntOrNull() ?: 0,
