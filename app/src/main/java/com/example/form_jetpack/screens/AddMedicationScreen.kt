@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.form_jetpack.R
 import com.example.form_jetpack.data.MedicationDetails
-import com.example.form_jetpack.data.MedicationViewModel
+import com.example.form_jetpack.viewModels.MedicationViewModel
 import com.example.form_jetpack.util.EndDateTextField
 import com.example.form_jetpack.util.Recurrence
 import com.example.form_jetpack.util.RecurrenceDropDownMenu

@@ -1,8 +1,8 @@
-package com.example.form_jetpack.data
+package com.example.form_jetpack.viewModels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.form_jetpack.data.MedicationDetails
 
 class MedicationViewModel : ViewModel() {
     // LiveData to observe medication details
@@ -15,5 +15,13 @@ class MedicationViewModel : ViewModel() {
     fun addMedication(medication: MedicationDetails) {
         medicationList.add(medication)
         medicationDetails.value = medication
+        medications.add(medication)
+
+    }
+    private val medications: MutableList<MedicationDetails> = mutableListOf()
+
+    // Retrieve all saved medications
+    fun getAllMedications(): List<MedicationDetails> {
+        return medications.toList()
     }
 }

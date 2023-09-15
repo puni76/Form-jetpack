@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.form_jetpack.app.MedicationApp
-import com.example.form_jetpack.data.MedicationViewModel
+import com.example.form_jetpack.viewModels.MedicationViewModel
 import com.example.form_jetpack.screens.AddMedicationScreen
 import com.example.form_jetpack.ui.theme.FormjetpackTheme
 
