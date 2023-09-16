@@ -14,6 +14,7 @@
     import androidx.compose.material3.MaterialTheme
     import androidx.compose.material3.Scaffold
     import androidx.compose.material3.Text
+    import androidx.compose.material3.TextButton
     import androidx.compose.runtime.Composable
     import androidx.compose.runtime.livedata.observeAsState
     import androidx.compose.ui.Alignment
@@ -27,7 +28,9 @@
     import com.example.form_jetpack.viewModels.MedicationViewModel
 
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType",
+        "SuspiciousIndentation"
+    )
     @Composable
     fun MedicationApp(navController: NavHostController, viewModel: MedicationViewModel) {
         val medicationDetails = viewModel.medicationDetails.observeAsState()
@@ -79,6 +82,16 @@
                                 Text("7 Evening Selection: ${medication.eveningSelection}") }
                             item { Spacer(modifier = Modifier.padding(4.dp))
                                 Text("8 Night Selection: ${medication.nightSelection}") }
+                                item {  TextButton(
+                                    onClick = {
+                                        // Remove the medication from the list
+                                        viewModel.deleteMedication(medication)
+                                    }
+                                ) {
+                                    Text("Cancel")
+                                }
+
+                                }
                         }
                     }
                 }

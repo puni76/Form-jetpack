@@ -18,6 +18,11 @@ class MedicationViewModel : ViewModel() {
         medications.add(medication)
 
     }
+    fun deleteMedication(medication: MedicationDetails) {
+        medicationList.remove(medication)
+        medicationDetails.value = medication
+        medications.remove(medication)
+    }
     private val medications: MutableList<MedicationDetails> = mutableListOf()
 
     // Retrieve all saved medications
